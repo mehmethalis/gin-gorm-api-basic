@@ -1,0 +1,6 @@
+# IDEA config files
+.idea/
+
+
+#Environment file
+.env
