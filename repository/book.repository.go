@@ -6,9 +6,9 @@ import (
 )
 
 type BookRepository interface {
-	InsertBook(b model.Book) model.Book
-	UpdateBook(b model.Book) model.Book
-	DeleteBook(b model.Book)
+	Insert(b model.Book) model.Book
+	Update(b model.Book) model.Book
+	Delete(b model.Book)
 	GetAll() []model.Book
 	FindById(bookId uint64) model.Book
 }
@@ -23,18 +23,18 @@ func NewBookRepository(dbConnection *gorm.DB) BookRepository {
 	}
 }
 
-func (db *bookConnection) InsertBook(b model.Book) model.Book {
+func (db *bookConnection) Insert(b model.Book) model.Book {
 	db.connection.Save(&b)
 	db.connection.Preload("User").Find(&b)
 	return b
 }
-func (db *bookConnection) UpdateBook(b model.Book) model.Book {
+func (db *bookConnection) Update(b model.Book) model.Book {
 	db.connection.Save(&b)
 	db.connection.Preload("User").Find(&b)
 	return b
 }
 
-func (db *bookConnection) DeleteBook(b model.Book) {
+func (db *bookConnection) Delete(b model.Book) {
 	db.connection.Delete(&b)
 }
 func (db *bookConnection) FindById(id uint64) model.Book {
