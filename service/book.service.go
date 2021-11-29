@@ -63,5 +63,6 @@ func (service *bookService) GetAll() []model.Book {
 func (service *bookService) IsAllowedToEdit(userId string, bookId uint64) bool {
 	b := service.bookRepository.FindById(bookId)
 	id := fmt.Sprintf("%v", b.UserID)
+	fmt.Println(userId, bookId, id, "asdasdasda")
 	return userId == id
 }

@@ -29,7 +29,7 @@ func (db *bookConnection) Insert(b model.Book) model.Book {
 	return b
 }
 func (db *bookConnection) Update(b model.Book) model.Book {
-	db.connection.Save(&b)
+	db.connection.Updates(&b)
 	db.connection.Preload("User").Find(&b)
 	return b
 }
