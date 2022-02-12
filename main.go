@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"haliscicek.com/gin-api/config"
@@ -26,6 +27,11 @@ var (
 func main() {
 	defer config.CloseDbConnection(db)
 	r := gin.Default()
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true
+	corsConfig.AllowHeaders = []string{"Origin", "Authorization"," Content-Type"}
+	r.Use(cors.New(corsConfig))
+
 	authRoutes := r.Group("api/auth")
 	{
 		authRoutes.POST("/login", authController.Login)
